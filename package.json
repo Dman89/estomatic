@@ -1,5 +1,5 @@
 {
-  "name": "weatherforecast",
+  "name": "ncc",
   "version": "1.0.0",
   "description": "Scaffolding to start an application with the RERM Stack",
   "main": "server/index.js",

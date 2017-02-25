@@ -1,7 +1,5 @@
 var webpack = require('webpack');
 var path = require('path');
-const PORT = process.env.PORT || 3000;
-const ROOT_URL = process.env.ROOT_URL || 'http://localhost:';
 
 module.exports = {
   entry: [
@@ -9,8 +7,7 @@ module.exports = {
   ],
     output: {
       path: path.resolve(__dirname, "public"),
-      filename: 'scripts/bundle.js',
-      publicPath: ROOT_URL+PORT,
+      filename: 'scripts/bundle.js'
     },
   resolve: {
     extensions: ['', '.js']
