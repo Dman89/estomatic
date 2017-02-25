@@ -1,11 +1,11 @@
 const User = require("../models/user")
 const jwt = require('jwt-simple');
-const config = require('../config');
+const config = process.env.goldcoin || (require('../config')).goldcoin;
 const mongoose = require("mongoose");
 
 function tokenForUser(user) {
   const time = new Date().getTime();
-  return jwt.encode({ sub: user.email, iat: time }, config.goldcoin)
+  return jwt.encode({ sub: user.email, iat: time }, config)
 }
 
 exports.signup = function(req, res, next) {
