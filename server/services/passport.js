@@ -1,5 +1,5 @@
 const User = require('../models/user');
-const config = process.env.goldcoin || require('../config');
+const config = process.env.goldcoin || (require('../config')).goldcoin;
 const passport = require('passport');
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const JwtStrategy = require('passport-jwt').Strategy;
@@ -24,7 +24,7 @@ const localLogin = new LocalStrategy(localOptions, function(email, password, don
 //Setup options for JWT Strategy
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromHeader('authorization'),
-  secretOrKey: config.goldcoin
+  secretOrKey: config
 };
 //Create JWT Strategy
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
