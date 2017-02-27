@@ -25,7 +25,9 @@ exports.signup = function(req, res, next) {
     }
     const user = new User({
       email: email,
-      password: password
+      password: password,
+      estimates: [],
+      vendors: []
     });
     User.findById(user._id, function(err, existingUser) {
       if (existingUser) {
@@ -39,7 +41,7 @@ exports.signup = function(req, res, next) {
         }
           //Respond to request indicating the user was created
           console.log("Created User");
-        return res.status(200).json({statusMessage: "Success, User Created!", token: tokenForUser(user)});
+        return res.status(201).json({statusMessage: "Success, User Created!", token: tokenForUser(user)});
       })
     })
   })
