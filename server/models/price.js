@@ -4,22 +4,21 @@ const Schema = mongoose.Schema;
 //Define, Create, Export
 
 const Price = new Schema({
-  item: String,
-  description: String,
-  unit: {
-      type: Object,
-      quantity: String,
-      upn: String,
-      currency: String,
-      cost: String,
-      id: String,
-      stock: String,
-      backorder: String,
-  },
-  region: String,
-  address: String,
-  range: String
+  Item: String,
+  Description: String,
+  UnitType: String,
+  Quantity: String,
+  UPN: String,
+  UnitPriceCurrency: String,
+  UnitPrice: String,
+  UnitId: String,
+  Stock: String,
+  Backorder: String,
+  Region: String,
+  Address: String,
+  "Range": String
 });
-const ModelClass = mongoose.model("price", Price);
+const price = mongoose.model("price", Price);
 
-module.exports = ModelClass;
+module.exports = price;
+module.exports.data = Price;

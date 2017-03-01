@@ -1,14 +1,21 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
+const Price = require('./price');
+const Estimate = require('./estimate');
 
 //Define, Create, Export
 
 const UserSchema = new Schema({
   email: {type: String, unique: true, lowercase: true},
   password: String,
-  estimates: [Object],
-  vendors: [Object]
+  estimates: [Estimate.data],
+  vendors: [{
+    name: String,
+    location: String,
+    serviceRange: String,
+    priceList: [Price.data]
+  }]
 });
 //Before saving a model, run this function {pre()}
 UserSchema.pre('save', function(next) {
