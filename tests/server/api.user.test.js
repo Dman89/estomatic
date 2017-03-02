@@ -120,6 +120,7 @@ describe("API Calls:", function() {
               .get(url)
               .set("authorization", user_token)
               .end((err, res) => {
+                res.body.should.have.property('user');
                 res.should.have.status(200);
                 res.body.should.be.a('object');
                 done();

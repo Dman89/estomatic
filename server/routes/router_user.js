@@ -5,6 +5,7 @@ const editUser = require("../services/user/edit");
 const allUsers = require("../services/user/all");
 const estimateNew = require("../services/user/estimateNew");
 const estimateDelete = require("../services/user/estimateDelete");
+const estimateEdit = require("../services/user/estimateEdit");
 const passport = require('passport');
 const requireAuth = passport.authenticate('jwt', {session: false});
 const requireLogin = passport.authenticate('local', {session: false});
@@ -20,6 +21,7 @@ module.exports = function(app) {
   app.post('/api/user/signin', requireLogin, Authentication.login);
   app.put('/api/user/:id/edit', requireAuth, editUser)
   app.post('/api/user/:id/estimate/new', requireAuth, estimateNew);
+  app.put('/api/user/:id/estimate/:estimateId/edit', requireAuth, estimateEdit);
   app.delete('/api/user/:id/estimate/:estimateId/delete', requireAuth, estimateDelete);
 
 

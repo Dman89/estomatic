@@ -16,7 +16,7 @@ describe("API Calls:", function() {
     url1 = '/api/user/signup';
     url2 = '/api/user/profile';
     url3 = '/api/user/signin';
-    url4 = url = '/api/user/deleteAUser';
+    url4 = '/api/user/deleteAUser';
     correctUser = {
         email: "FakeUserToBeDeletedLater",
         password: "Password"
@@ -114,162 +114,57 @@ describe("API Calls:", function() {
               });
         });
       });
-      // describe('\t/LOGIN Estimates', () => {
-      //   var url;
-      //   beforeEach(()=>{
-      //     url = '/api/user/signin'
-      //   })
-      //   it('Success: Estimates LOGGED In', (done) => {
-      //     var user = {
-      //     	"email": "Usseer",
-      //     	"password": "Paasssswwoorrd"
-      //     }
-      //     chai.request(server)
-      //         .post(url)
-      //         .send(user)
-      //         .end((err, res) => {
-      //             res.should.have.status(200);
-      //             res.body.should.be.a('object');
-      //           done();
-      //         });
-      //   });
-      //   it('Error: Estimates LOGGED In (Wrong Password)', (done) => {
-      //     var user = {
-      //     	"email": "Usseer",
-      //     	"password": "Paasssswwoorr"
-      //     }
-      //     chai.request(server)
-      //       .post(url)
-      //       .send(user)
-      //       .end((err, res) => {
-      //           res.should.have.status(401);
-      //           res.body.should.be.a('object');
-      //         done();
-      //       });
-      //   });
-      //   it('Error: Estimates LOGGED In (Wrong Estimates)', (done) => {
-      //     var user = {
-      //     	"email": "Ussee",
-      //     	"password": "Paasssswwoorrd"
-      //     }
-      //     chai.request(server)
-      //       .post(url)
-      //       .send(user)
-      //       .end((err, res) => {
-      //           res.should.have.status(401);
-      //           res.body.should.be.a('object');
-      //         done();
-      //       });
-      //   });
-      // });
-      // describe('\t/Profile Estimates (Restricted)', () => {
-      //   var url, user_token;
-      //
-      //   beforeEach((done)=>{
-      //     url = '/api/user/profile'
-      //     var usera = {
-      //       "email": "Usseer",
-      //       "password": "Paasssswwoorrd"
-      //     }
-      //     chai.request(server)
-      //       .post('/api/user/signin')
-      //       .send(usera)
-      //       .end((err, res) => {
-      //         user_token = res.body.token;
-      //         done();
-      //       });
-      //   })
-      //   it('Success: Estimates LOGGED In', (done) => {
-      //     var user = {
-      //     	"email": "Usseer",
-      //     	"password": "Paasssswwoorrd"
-      //     }
-      //     chai.request(server)
-      //         .get(url)
-      //         .set("authorization", user_token)
-      //         .end((err, res) => {
-      //           res.should.have.status(200);
-      //           res.body.should.be.a('object');
-      //           done();
-      //         });
-      //   });
-      //   it('Error: Estimates LOGGED In (Wrong TOKEN)', (done) => {
-      //     chai.request(server)
-      //       .get(url)
-      //       .set("authorization", "user_token")
-      //       .end((err, res) => {
-      //         res.should.have.status(401);
-      //         res.body.should.be.a('object');
-      //         done();
-      //       });
-      //   });
-      // });
-      // describe('\t/Edit Estimates (Restricted)', () => {
-      //   var url, user_token,  userToEdit,newId;
-      //
-      //   beforeEach((done)=>{
-      //     url = '/api/user/profile';
-      //     var usera = {
-      //       "email": "Usseer",
-      //       "password": "Paasssswwoorrd"
-      //     }
-      //     chai.request(server)
-      //       .post('/api/user/signin')
-      //       .send(usera)
-      //       .end((err, res) => {
-      //         user_token = res.body.token;
-      //         chai.request(server)
-      //             .get(url)
-      //             .set("authorization", user_token)
-      //             .end((err, res) => {
-      //               userToEdit = res.body.user;
-      //               newId = userToEdit._id;
-      //               done();
-      //             });
-      //       });
-      //   })
-      //   it('Success: Estimates SAVED', (done) => {
-      //     var ApiUrlToEdit = '/api/user/'+newId+"/edit";
-      //     chai.request(server)
-      //         .put(ApiUrlToEdit)
-      //         .set("authorization", user_token)
-      //         .send(userToEdit)
-      //         .end((err, res) => {
-      //           expect(res.body.user).to.deep.equal(userToEdit)
-      //           res.should.have.status(200);
-      //           res.body.should.be.a('object');
-      //           done();
-      //         });
-      //   });
-      //   it('Success: Estimates EDITED', (done) => {
-      //     var ApiUrlToEdit = '/api/user/'+newId+"/edit";
-      //     userToEdit.vendors = [{"name":"one"}]
-      //     userToEdit.estimates = [{"name":"one"}]
-      //     chai.request(server)
-      //         .put(ApiUrlToEdit)
-      //         .set("authorization", user_token)
-      //         .send(userToEdit)
-      //         .end((err, res) => {
-      //           expect(res.body.user.vendors[0].name).to.deep.equal(userToEdit.vendors[0].name)
-      //           expect(res.body.user.estimates[0].name).to.deep.equal(userToEdit.estimates[0].name)
-      //           res.should.have.status(200);
-      //           res.body.should.be.a('object');
-      //           done();
-      //         });
-      //   });
-      //   it('Error: Estimates EDITED Failed (Wrong TOKEN)', (done) => {
-      //     var ApiUrlToEdit = '/api/user/'+userToEdit._id+"/edit";
-      //     chai.request(server)
-      //       .put(ApiUrlToEdit)
-      //       .set("authorization", "user_token")
-      //       .send(userToEdit)
-      //       .end((err, res) => {
-      //         res.should.have.status(401);
-      //         res.body.should.be.a('object');
-      //         done();
-      //       });
-      //   });
-      // });
+
+
+      describe('\t/PUT Estimates', () => {
+        var url, urlb, incorrectData,editID, editedData;
+        beforeEach((done)=>{
+          url = "/api/user/profile/";
+          chai.request(server)
+              .get(url)
+              .set("authorization", correctUserToken)
+              .end((err, res) => {
+                editID = res.body.user.estimates[0]._id;
+                urlb = `/api/user/${correctUserId}/estimate/${editID}/edit`;
+                done();
+            });
+        })
+        it('Success: PUT Estimates', function(done) {
+          editedData = correctData;
+          editedData.Name = "ZZZ";
+          var completedTask = 0;
+          chai.request(server)
+              .put(urlb)
+              .set("authorization", correctUserToken)
+              .send(editedData)
+              .end((err, res) => {
+                expect(res.body.user).to.exist;
+                var x = 0;
+                var checkLength = res.body.user.estimates.length -1;
+                _.map(res.body.user.estimates, function(i) {
+                  if(i.Name==editedData.Name) {
+                    completedTask = 1;
+                  }
+                  x+=1
+                  if (x == checkLength) {
+                    expect(completedTask).to.equal(1);
+                    done();
+                  }
+                })
+              });
+        });
+        it('Error: PUT Estimates (No Token)', (done) => {
+          chai.request(server)
+              .put(urlb)
+              .set("authorization", null)
+              .send(correctData)
+              .end((err, res) => {
+                expect(err).to.exist;
+                done();
+              });
+        });
+      });
+
       describe('\t/Delete Estimates', () => {
         var url, incorrectData, deleteUrl, deletedID;
         beforeEach((done)=>{
@@ -305,8 +200,6 @@ describe("API Calls:", function() {
                 else {
                   expect(res.status).to.equal(200);
                   _.map(res.body.user.estimates, function(data) {
-                    console.log("\n\n\n\nWorks");
-                    console.log(x == checkLength);
                     if (data._id == deletedID) {
                       results += 1;
                     }
