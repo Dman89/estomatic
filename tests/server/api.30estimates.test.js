@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
 var _ = require("lodash");
 var User = require('../../server/models/user');
+var Estimate = require('../../server/models/estimate');
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 var server = require('../../server/index.js');
@@ -13,6 +14,7 @@ chai.use(chaiHttp);
 describe("API Calls:", function() {
   var url1, url2, url3, correctUser, correctUserToken, correctUserId, correctData;
   beforeEach((done)=>{
+    //Create User Before Each Call
     url1 = '/api/user/signup';
     url2 = '/api/user/profile';
     url3 = '/api/user/signin';
@@ -22,36 +24,13 @@ describe("API Calls:", function() {
         password: "Password"
     }
     correctData = {
-      Name: "New Post",
-      "Date": new Date(),
-      Description: "A Short Description",
-      Job: "A Small Job In The South",
-      Address: "123 On The Boarder Mexican Food, El Cajon, 92054",
-      Vendor: {
-        ID: "Johns_Contracting",
-        Name: "Johns Contracting",
-        Address: "SouthSide Smiths",
-        "Range": "2000 Miles",
-        Region: "West_Coast",
-        PriceListId: "FakeID"
-      },
-      ItemList: [
-        {
-          Item: "Short Item",
-          Description: "Short Item",
-          UnitType: "Short Item",
-          Quantity: "5",
-          UPN: "Short Item",
-          UnitPriceCurrency: "Short Item",
-          UnitPrice: "Short Item",
-          UnitId: "Short Item",
-          Stock: "n/a",
-          Backorder: false,
-          Region: "Short Item",
-          Address: "Short Item",
-          "Range": "Short Item"
-        }
-      ]
+      estimate: {
+        name: "String",
+        date: "String",
+        description: "String",
+        job: "String",
+        address: "String"
+      }
     };
     chai.request(server)
         .post(url1)
@@ -62,6 +41,7 @@ describe("API Calls:", function() {
         });
   })
   afterEach((done)=> {
+    //Delete Each User After Call
     chai.request(server)
         .delete(url4)
         .send(correctUser)
@@ -72,16 +52,19 @@ describe("API Calls:", function() {
   })
   describe("\tEstimates:", () => {
     beforeEach((done)=>{
+      //Login and Set User
       chai.request(server)
           .post(url3)
           .send(correctUser)
           .end((err, res) => {
+            //Login User
             correctUserToken = res.body.token;
             correctUserId = correctUser._id;
             chai.request(server)
                 .get(url2)
                 .set("authorization", correctUserToken)
                 .end((err, res) => {
+                  //Set User
                   correctUser = res.body.user;
                   correctUserId = correctUser._id;
                   done();
@@ -99,8 +82,13 @@ describe("API Calls:", function() {
               .set("authorization", correctUserToken)
               .send(correctData)
               .end((err, res) => {
-                expect(res.body.user.estimates[(res.body.user.estimates.length - 1)].name).to.deep.equal(correctData.name);
-                done();
+                _.map(res.body.user.estimates, function(r){
+                  let {estimateId} = res.body;
+                  if (r._id===estimateId) {
+                    expect(r._id).to.deep.equal(estimateId);
+                    done();
+                  }
+                })
               });
         });
         it('Error: Post Estimates (No Token)', (done) => {
@@ -116,7 +104,7 @@ describe("API Calls:", function() {
       });
 
 
-      describe('\t/PUT Estimates', () => {
+      describe('\t/PUT Estimates =>', () => {
         var url, urlb, incorrectData,editID, editedData;
         beforeEach((done)=>{
           url = "/api/user/profile/";
@@ -124,14 +112,14 @@ describe("API Calls:", function() {
               .get(url)
               .set("authorization", correctUserToken)
               .end((err, res) => {
-                editID = res.body.user.estimates[0]._id;
+                editID = res.body.user.estimates[0];
                 urlb = `/api/user/${correctUserId}/estimate/${editID}/edit`;
                 done();
             });
         })
         it('Success: PUT Estimates', function(done) {
           editedData = correctData;
-          editedData.Name = "ZZZ";
+          editedData.estimate.name = "ZZZ";
           var completedTask = 0;
           chai.request(server)
               .put(urlb)
@@ -142,7 +130,7 @@ describe("API Calls:", function() {
                 var x = 0;
                 var checkLength = res.body.user.estimates.length -1;
                 _.map(res.body.user.estimates, function(i) {
-                  if(i.Name==editedData.Name) {
+                  if(i.name==editedData.name) {
                     completedTask = 1;
                   }
                   x+=1
@@ -176,10 +164,10 @@ describe("API Calls:", function() {
               .end((err, res) => {
                 var continueToGo = 1;
                 _.map(res.body.user.estimates, function(data) {
-                  if (data.Name == correctData.Name && continueToGo == 1) {
+                  if (data.name == correctData.estimate.name && continueToGo == 1) {
                     continueToGo = 0;
                     deletedID = data._id;
-                    deleteUrl = `/api/user/${correctUserId}/estimate/${data._id}/delete`
+                    deleteUrl = `/api/user/${correctUserId}/estimate/${deletedID}/delete`
                     done();
                   }
                 })
