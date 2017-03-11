@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const User = require('../../models/user');
 
 function deleteUser(req, res) {
   var email = req.body.email, password = req.body.password

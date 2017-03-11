@@ -1,7 +1,7 @@
 const User = require('../../models/user');
 
 function allUsers(req, res) {
-  var user = req.body;
+  var user = req.body.user;
   var id = user._id;
   var idCheck = (req.params.id == id);
   if (idCheck) {

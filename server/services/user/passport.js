@@ -1,5 +1,5 @@
-const User = require('../models/user');
-const config = process.env.goldcoin || (require('../config')).goldcoin;
+const User = require('../../models/user');
+const config = process.env.goldcoin || (require('../../config')).goldcoin;
 const passport = require('passport');
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const JwtStrategy = require('passport-jwt').Strategy;
