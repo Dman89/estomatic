@@ -5,20 +5,16 @@ const Price = require('./price');
 //Define, Create, Export
 
 const Estimate = new Schema({
-  Name: String,
-  "Date": String,
-  Description: String,
-  Job: String,
-  Address: String,
-  Vendor: {
-    ID: String,
-    Name: String,
-    Address: String,
-    "Range": String,
-    Region: String,
-    PriceListId: String
+  name: String,
+  "date": String,
+  description: String,
+  job: String,
+  address: String,
+  vendor: {
+    type: mongoose.Schema.Types.ObjectId, ref: 'vendor'
   },
-  ItemList: [Price.data]
+  priceList: {type: mongoose.Schema.Types.ObjectId, ref: 'price'},
+  itemList: [{type: mongoose.Schema.Types.ObjectId, ref: 'price'}]
 });
 const ModelClass = mongoose.model("estimate", Estimate);
 

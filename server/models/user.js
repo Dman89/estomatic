@@ -9,13 +9,16 @@ const Estimate = require('./estimate');
 const UserSchema = new Schema({
   email: {type: String, unique: true, lowercase: true},
   password: String,
-  estimates: [Estimate.data],
-  vendors: [{
-    name: String,
-    location: String,
-    serviceRange: String,
-    priceList: [Price.data]
-  }]
+  estimates: [
+    {
+      type: mongoose.Schema.Types.ObjectId, ref: 'estimate'
+    }
+  ],
+  vendors: [
+    {
+      type: mongoose.Schema.Types.ObjectId, ref: 'vendor'
+    }
+  ]
 });
 //Before saving a model, run this function {pre()}
 UserSchema.pre('save', function(next) {

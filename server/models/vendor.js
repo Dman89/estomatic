@@ -5,15 +5,15 @@ const Price = require('./price');
 //Define, Create, Export
 
 const Vendor = new Schema({
-  Name: String,
-  Address: String,
-  "Range": String,
-  Region: String,
-  PriceList: [Price.data],
-  OldPriceLists: [
+  name: String,
+  address: String,
+  "range": String,
+  region: String,
+  priceList: [{type: mongoose.Schema.Types.ObjectId, ref: 'price'}],
+  oldPriceLists: [
     {
-      "Date": String,
-      PriceList: [Price.data]
+      "date": String,
+      priceList: [{type: mongoose.Schema.Types.ObjectId, ref: 'price'}]
     }
   ]
 });
