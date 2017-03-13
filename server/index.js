@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const app = express();
 const UserRouter = require('./routes/router_user');
 const EstimateRouter = require('./routes/router_estimate');
+const VendorRouter = require('./routes/vendor');
 const db = require('./database');
 const cors = require('cors');
 app.use(morgan('combined'));
@@ -12,6 +13,7 @@ app.use(cors()); // Allows CORS(Cross Origin GET Request)
 app.use(bodyParser.json({type: '*/*'}));
 UserRouter(app);
 EstimateRouter(app);
+VendorRouter(app);
 
 
 
