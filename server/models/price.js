@@ -16,7 +16,8 @@ const Price = new Schema({
   backorder: String,
   region: String,
   address: String,
-  "range": String
+  "range": String,
+  date: Date
 });
 const price = mongoose.model("price", Price);
 

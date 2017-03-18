@@ -9,11 +9,11 @@ const Vendor = new Schema({
   address: String,
   "range": String,
   region: String,
-  priceList: [{type: mongoose.Schema.Types.ObjectId, ref: 'price'}],
+  priceList: [{type: mongoose.Schema.Types.ObjectId, ref: 'priceList'}],
   oldPriceLists: [
     {
       "date": String,
-      priceList: [{type: mongoose.Schema.Types.ObjectId, ref: 'price'}]
+      priceList: [{type: mongoose.Schema.Types.ObjectId, ref: 'priceList'}]
     }
   ]
 });

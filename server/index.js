@@ -6,6 +6,8 @@ const app = express();
 const UserRouter = require('./routes/router_user');
 const EstimateRouter = require('./routes/router_estimate');
 const VendorRouter = require('./routes/vendor');
+const PriceListRouter = require('./routes/priceList');
+const PriceRouter = require('./routes/price');
 const db = require('./database');
 const cors = require('cors');
 app.use(morgan('combined'));
@@ -14,6 +16,8 @@ app.use(bodyParser.json({type: '*/*'}));
 UserRouter(app);
 EstimateRouter(app);
 VendorRouter(app);
+PriceRouter(app);
+PriceListRouter(app);
 
 
 

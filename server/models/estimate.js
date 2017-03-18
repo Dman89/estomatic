@@ -13,7 +13,7 @@ const Estimate = new Schema({
   vendor: {
     type: mongoose.Schema.Types.ObjectId, ref: 'vendor'
   },
-  priceList: {type: mongoose.Schema.Types.ObjectId, ref: 'price'},
+  priceList: {type: mongoose.Schema.Types.ObjectId, ref: 'priceList'},
   itemList: [{type: mongoose.Schema.Types.ObjectId, ref: 'price'}]
 });
 const ModelClass = mongoose.model("estimate", Estimate);
