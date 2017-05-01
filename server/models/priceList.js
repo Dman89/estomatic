@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 //Define, Create, Export
 
 const PriceList = new Schema({
+<<<<<<< HEAD
   name: String,
   address: String,
   "range": String,
@@ -11,9 +12,14 @@ const PriceList = new Schema({
   date: String,
   expDate: String,
   vendorId: String,
-  items: [{type: mongoose.Schema.Types.ObjectId, ref: 'price'}]
+  items: [{type: mongoose.Schema.Types.ObjectId, ref: 'price'}],
+  description: String,
+  region: String,
+  address: String,
+  "range": String,
+  date: Date
 });
-const ModelClass = mongoose.model("priceList", PriceList);
+const price = mongoose.model("priceList", PriceList);
 
-module.exports = ModelClass;
+module.exports = price;
 module.exports.data = PriceList;

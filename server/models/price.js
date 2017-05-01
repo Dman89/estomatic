@@ -17,7 +17,8 @@ const Price = new Schema({
   region: String,
   address: String,
   "range": String,
-  ownerId: String
+  ownerId: String,
+  date: Date
 });
 const price = mongoose.model("price", Price);
 

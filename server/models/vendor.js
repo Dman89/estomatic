@@ -5,10 +5,10 @@ const Schema = mongoose.Schema;
 
 const Vendor = new Schema({
   admins: Array,
-  name: {type: String, required: true},
-  address: {type: String, required: true},
-  "range": {type: String, required: true},
-  region: {type: String, required: true},
+  name: String,
+  address: String,
+  "range": String,
+  region: String,
   priceList: [{type: mongoose.Schema.Types.ObjectId, ref: 'priceList'}],
   oldPriceLists: [
     {
