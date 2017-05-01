@@ -36,7 +36,7 @@ describe("API Calls:", function() {
         .post(url1)
         .send(correctUser)
         .end((err, res) => {
-          console.log(!err ? "Successfully Deleted" : "Failed to Delete");
+          console.log(!err ? "Successfully Login" : "Failed to Login");
           done();
         });
   })
@@ -59,7 +59,6 @@ describe("API Calls:", function() {
           .end((err, res) => {
             //Login User
             correctUserToken = res.body.token;
-            correctUserId = correctUser._id;
             chai.request(server)
                 .get(url2)
                 .set("authorization", correctUserToken)
@@ -128,12 +127,12 @@ describe("API Calls:", function() {
               .end((err, res) => {
                 expect(res.body.user).to.exist;
                 var x = 0;
-                var checkLength = res.body.user.estimates.length -1;
+                var checkLength = res.body.user.estimates.length;
                 _.map(res.body.user.estimates, function(i) {
                   if(i.name==editedData.name) {
                     completedTask = 1;
                   }
-                  x+=1
+                  x+=1;
                   if (x == checkLength) {
                     expect(completedTask).to.equal(1);
                     done();

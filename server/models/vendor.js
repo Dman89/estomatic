@@ -1,21 +1,22 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const Price = require('./price');
 
 //Define, Create, Export
 
 const Vendor = new Schema({
-  name: String,
-  address: String,
-  "range": String,
-  region: String,
-  priceList: [{type: mongoose.Schema.Types.ObjectId, ref: 'price'}],
+  admins: Array,
+  name: {type: String, required: true},
+  address: {type: String, required: true},
+  "range": {type: String, required: true},
+  region: {type: String, required: true},
+  priceList: [{type: mongoose.Schema.Types.ObjectId, ref: 'priceList'}],
   oldPriceLists: [
     {
       "date": String,
-      priceList: [{type: mongoose.Schema.Types.ObjectId, ref: 'price'}]
+      priceList: [{type: mongoose.Schema.Types.ObjectId, ref: 'priceList'}]
     }
-  ]
+  ],
+  TIME: Date
 });
 const ModelClass = mongoose.model("vendor", Vendor);
 

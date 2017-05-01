@@ -8,7 +8,7 @@ const Price = new Schema({
   description: String,
   unitType: String,
   quantity: String,
-  UPN: String,
+  upc: String,
   unitPriceCurrency: String,
   unitPrice: String,
   unitId: String,
@@ -16,7 +16,8 @@ const Price = new Schema({
   backorder: String,
   region: String,
   address: String,
-  "range": String
+  "range": String,
+  ownerId: String
 });
 const price = mongoose.model("price", Price);
 

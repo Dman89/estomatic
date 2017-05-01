@@ -5,9 +5,9 @@ const passport = require('passport');
 const requireAuth = passport.authenticate('jwt', {session: false});
 const requireLogin = passport.authenticate('local', {session: false});
 module.exports = function(app) {
-  app.post('/api/vendors', V.gets);
-  app.post('/api/vendor/:id', V.get);
-  app.post('/api/user/:id/vendor/new', requireAuth, V.new);
-  app.put('/api/user/:id/vendor/:vendorId/edit', requireAuth, V.edit);
-  app.delete('/api/user/:id/vendor/:vendorId/delete', requireAuth, V.del);
+  app.get('/api/vendors', V.gets);
+  app.get('/api/vendor/:id', V.get);
+  app.post('/api/vendor/new', requireAuth, V.new);
+  app.put('/api/vendor/:id/edit', requireAuth, V.edit);
+  app.delete('/api/vendor/:id/delete', requireAuth, V.del);
 }

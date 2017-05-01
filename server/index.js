@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const app = express();
 const UserRouter = require('./routes/router_user');
 const EstimateRouter = require('./routes/router_estimate');
-const VendorRouter = require('./routes/vendor');
+const VendorRouter = require('./routes/router_vendor');
 const db = require('./database');
 const cors = require('cors');
 app.use(morgan('combined'));

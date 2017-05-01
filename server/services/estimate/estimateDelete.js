@@ -15,8 +15,9 @@ function estimateDelete(req, res, next) {
       .populate("vendor")
       .populate("estimate")
       .exec(function(err3, updatedUser) {
-        if (err3) {return res.status(500).json({statusMessage: "Internal Error: " + err2.message, err: err.message})}
-        Estimate.remove({_id: estimateId}, function(err, results) {
+        if (err3) {return res.status(500).json({statusMessage: "Internal Error: " + err3.message})}
+        Estimate.remove({_id: estimateId}, function(err4, results) {
+          if (err4) {return res.status(500).json({statusMessage: "Internal Error: " + err4.message})}
           return res.status(200).json({statusMessage: "Completed Deleting Estimate", user: updatedUser, results: results})
         })
       })
